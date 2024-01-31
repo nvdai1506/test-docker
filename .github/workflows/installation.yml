@@ -22,5 +22,14 @@ jobs:
           source: ./install_commands.sh
           target: ~/install_commands.sh
 
-      - name: Run script on Ubuntu server
-        run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} 'bash -s' < ~/install_commands.sh
+      - name: Run docker-compose on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd ~/
+            chmod +x install_commands.sh
+            ./install_commands.sh
