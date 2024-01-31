@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./install_commands.sh
-          target: ~/install_commands.sh
+          target: ~/
 
       - name: Run docker-compose on server
         uses: appleboy/ssh-action@master
